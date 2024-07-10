@@ -1,52 +1,69 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React from 'react';
+import { Slide } from 'react-slideshow-image';
+import 'react-slideshow-image/dist/styles.css';
+import intro3 from '../assets/people2.jpg';
+import intro2 from '../assets/book.png';
+import intro1 from '../assets/people1.jpg';
+import { Link } from 'react-router-dom';
+import { FaArrowRight } from 'react-icons/fa';
+
+const divStyle = {
+  display: 'flex',
+  flexDirection: 'column', // Arrange children vertically
+  justifyContent: 'center', // Center content horizontally
+  alignItems: 'center', // Center content vertically
+  backgroundSize: 'cover',
+  height: '550px',
+  opacity: 0.8, // Decrease the opacity of the background image
+  position: 'relative', // Positioning for the overlay
+  zIndex: 0, // Ensure it is below the dropdown
+};
+
+const overlayStyle = {
+  position: 'absolute',
+  top: 0,
+  left: 0,
+  right: 0,
+  bottom: 0,
+  backgroundColor: 'rgba(0, 0, 0, 0.3)', // Dark overlay
+  zIndex: 1, // Ensure overlay is on top of the image
+};
+
+const textStyle = {
+  position: 'relative',
+  zIndex: 2, // Ensure text is on top of the overlay
+};
+
+const slideImages = [
+  {
+    url: intro1,
+    caption: `“The only thing you absolutely have to know is the location of the library.” Albert Einstein`,
+  },
+  {
+    url: intro2,
+    caption: '“Books are a uniquely portable magic.” Stephen King',
+  },
+  {
+    url: intro3,
+    caption: '“A room without books is like a body without a soul.” – Marcus Tullius Cicero',
+  },
+];
 
 const Main = () => {
-  const [query, setQuery] = useState('');
-  const [results, setResults] = useState([]);
-  const [error, setError] = useState(null);
-
-  const fetchResults = async () => {
-    const url = `https://www.googleapis.com/books/v1/volumes?q=${query}`;
-
-    try {
-      const response = await axios.get(url);
-      setResults(response.data.items || []);
-      setError(null);
-    } catch (err) {
-      setError(`Error fetching results: ${err.message}`);
-      console.error('Error fetching results:', err);
-    }
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    fetchResults();
-  };
-
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          placeholder="Search for books"
-        />
-        <button type="submit">Search</button>
-      </form>
-      {error && <p>{error}</p>}
-      <div>
-        {results.map(result => (
-          <div key={result.id}>
-            <h3>{result.volumeInfo.title}</h3>
-            <p>{result.volumeInfo.authors && result.volumeInfo.authors.join(', ')}</p>
-            {result.volumeInfo.imageLinks && (
-              <img src={result.volumeInfo.imageLinks.thumbnail} alt={result.volumeInfo.title} />
-            )}
+    <div className="slide-container relative z-0 font-serif">
+      <Slide>
+        {slideImages.map((slideImage, index) => (
+          <div key={index}>
+            <div style={{ ...divStyle, backgroundImage: `url(${slideImage.url})` }}>
+              <div style={overlayStyle}></div>
+              <span className="text-white leading-relaxed lg:text-2xl font-bold font-spci m-10" style={textStyle}>
+                {slideImage.caption}
+              </span>
+            </div>
           </div>
         ))}
-      </div>
+      </Slide>
     </div>
   );
 };
