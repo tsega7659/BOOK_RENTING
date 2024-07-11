@@ -19,7 +19,7 @@ const BookDetails = () => {
             <img
               src={book.volumeInfo.imageLinks.thumbnail}
               alt={book.volumeInfo.title}
-              className=' object-cover w-[1500px] h-[250px]  '
+              className=' object-cover   '
             />
             
           )}
