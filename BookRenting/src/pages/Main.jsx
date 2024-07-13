@@ -6,6 +6,8 @@ import intro2 from '../assets/book.png';
 import intro1 from '../assets/people1.jpg';
 import { Link } from 'react-router-dom';
 import { FaArrowRight } from 'react-icons/fa';
+import Best from './Best';
+import FAQ from './FAQ';
 
 const divStyle = {
   display: 'flex',
@@ -64,6 +66,8 @@ const Main = () => {
           </div>
         ))}
       </Slide>
+      <Best />
+      <FAQ />
     </div>
   );
 };

@@ -3,7 +3,7 @@ import axios from 'axios';
 import { FaSearch } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
 import logo from "../assets/logo.jpeg";
-import Main from '../pages/Main';
+
 
 const Nav = () => {
   const [query, setQuery] = useState('');
@@ -36,19 +36,20 @@ const Nav = () => {
           <span className='text-sm text-orange-500 text-idalist '>Tsimona Books</span>
         </div>
         <div className='lg:flex items-center justify-between px-2 lg:mr-12 mr-2 mt-2 lg:mt'>
-          <div> <Link to={Main} className='text-orange-800 hover:underline  ml-8 '>Home</Link> </div>
+          <div> <Link to="/" className='text-orange-800 hover:underline  ml-8 '>Home</Link> </div>
+          <div> <Link to="/FAQ" className='text-orange-800 hover:underline  ml-8 lg:block hidden '>FAQ</Link> </div>
           <div className="relative group shadow-xl px-4 bg-orange-200 text-orange-600 rounded-2xl w-44 mx-2 lg:ml-16 text-center z-50 mb-2">
             <div className="p-1">Search by Genres</div>
             <div className="absolute hidden group-hover:block z-50">
-              <ul className="absolute bg-orange-200 mt-4 p-2 rounded-xl shadow-lg">
-                <li className="py-1 hover:text-orange-50 hover:underline">Fantasy</li>
-                <li className="py-1 hover:text-orange-50 hover:underline">Mystery</li>
-                <li className="py-1 hover:text-orange-50 hover:underline">Thriller</li>
-                <li className="py-1 hover:text-orange-50 hover:underline">Romance</li>
-                <li className="py-1 hover:text-orange-50 hover:underline">Biography/Autobiography</li>
-                <li className="py-1 hover:text-orange-50 hover:underline">Self-Help</li>
-                <li className="py-1 hover:text-orange-50 hover:underline">History</li>
-                <li className="py-1 hover:text-orange-50 hover:underline">Science</li>
+              <ul className="absolute bg-orange-200 mt-4 p-4 rounded-xl shadow-lg">
+                <li className="py-1 px-3 hover:text-orange-50 hover:underline"> <Link to="/Fantasy">Fantasy</Link> </li>
+                <li className="py-1 px-3 hover:text-orange-50 hover:underline"><Link to="/Mystery">Mystery</Link> </li>
+                <li className="py-1 px-3 hover:text-orange-50 hover:underline"><Link to="/Thriller">Thriller</Link></li>
+                <li className="py-1 px-3 hover:text-orange-50 hover:underline"><Link to="/romance">Romance</Link></li>
+                <li className="py-1 px-3 hover:text-orange-50 hover:underline"><Link to="/Biography">Biography</Link></li>
+                <li className="py-1 px-3 hover:text-orange-50 hover:underline"><Link to="/Self-Help">Self-Help</Link></li>
+                <li className="py-1 px-3 hover:text-orange-50 hover:underline"><Link to="/History">History</Link></li>
+                <li className="py-1 px-3 hover:text-orange-50 hover:underline"><Link to="/Science">Science</Link></li>
               </ul>
             </div>
           </div>

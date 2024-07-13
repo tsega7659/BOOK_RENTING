@@ -1,36 +1,40 @@
 import React from 'react';
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 const BookDetails = () => {
-  const { id } = useParams();
   const location = useLocation();
-  const { book } = location.state || { book: null };
+  const { book } = location.state;
 
   if (!book) {
-    return <div>Book not found</div>;
+    return <div>Book details not available.</div>;
   }
 
+  const { volumeInfo } = book;
+
   return (
-    <div className='p-8 bg-orange-50 mt-12 mx-16 rounded-xl shadow-lg font-serif'>
-      <h2 className='text-2xl font-bold mb-8 text-orange-900'>{book.volumeInfo.title}</h2>
-      <div className='flex '>
-        <div className='m-4  '>
-          {book.volumeInfo.imageLinks && (
-            <img
-              src={book.volumeInfo.imageLinks.thumbnail}
-              alt={book.volumeInfo.title}
-              className=' object-cover   '
-            />
-            
-          )}
-        </div>
-        <div className='ml-8 text-orange-800'>
-          <p className='text-lg mb-2'><strong>Authors:</strong> {book.volumeInfo.authors.join(', ')}</p>
-          <p className='text-lg mb-2'><strong>Publisher:</strong> {book.volumeInfo.publisher}</p>
-          <p className='text-lg mb-2'><strong>Published Date:</strong> {book.volumeInfo.publishedDate}</p>
-          <p className='text-lg mb-2'><strong>Page Count:</strong> {book.volumeInfo.pageCount}</p>
-          <p className='text-lg mb-2'><strong>Description:</strong> {book.volumeInfo.description}</p>
-        </div>
+    <div className='lg:mx-28 mx-6 my-6  lg:mb-0 mb-4 font-serif'>
+      <h2 className='text-2xl font-bold mb-8 mt-12 text-orange-900'>{volumeInfo.title}</h2>
+      {volumeInfo.imageLinks && (
+        <img
+          src={volumeInfo.imageLinks.thumbnail}
+          alt={volumeInfo.title}
+          className='object-cover w-[200px] h-[150px] m-2 mb-8'
+        />
+      )}
+      <div className='text-orange-600 text-sm'>
+        <p>By: {volumeInfo.authors ? volumeInfo.authors.join(', ') : 'Unknown Author'}</p>
+      </div>
+      <div className='text-orange-600 text-sm'>
+        <p>{volumeInfo.description}</p>
+      </div>
+      <div className='text-orange-600 text-sm'>
+        <p>Average Rating: {volumeInfo.averageRating || 'No rating available'}</p>
+      </div>
+      <div className='text-orange-600 text-sm'>
+        <p>Published Date: {volumeInfo.publishedDate || 'No date available'}</p>
+      </div>
+      <div className='text-orange-600 text-sm'>
+        <p>Page Count: {volumeInfo.pageCount || 'No page count available'}</p>
       </div>
     </div>
   );
