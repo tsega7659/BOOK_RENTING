@@ -1,7 +1,7 @@
-// Best.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { FaDownload } from 'react-icons/fa';
 
 const Best = () => {
   const [results, setResults] = useState([]);
@@ -13,6 +13,7 @@ const Best = () => {
 
     try {
       const response = await axios.get(url);
+      console.log(response.data.items); // Log the API response to understand its structure
       const filteredResults = response.data.items.filter(
         book => book.volumeInfo.averageRating && book.volumeInfo.averageRating > 4
       );
@@ -27,6 +28,15 @@ const Best = () => {
   useEffect(() => {
     fetchResults();
   }, []);
+
+  const handleDownload = (link) => {
+    const downloadLink = document.createElement('a');
+    downloadLink.href = link;
+    downloadLink.setAttribute('download', 'book'); 
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    downloadLink.remove();
+  };
 
   return (
     <div className='lg:mx-16 mx-4 mt-8 lg:mb-0 mb-4 bg-orange-50 p-3 font-serif '>
@@ -44,7 +54,7 @@ const Best = () => {
                   />
                 )}
                 <div className='absolute font-sm bg-orange-100 w-32 text-left rounded-md p-1 text-orange-400'>
-                <div className='flex justify-between px-1'><span>rate</span><span>{result.volumeInfo.averageRating || 'No rating available'}</span></div>
+                  <div className='flex justify-between px-1'><span>rate</span><span>{result.volumeInfo.averageRating || 'No rating available'}</span></div>
                 </div>
               </div>
             </div>
@@ -55,6 +65,7 @@ const Best = () => {
               <div className='text-orange-600 text-sm'>
                 <p>By: {result.volumeInfo.authors ? result.volumeInfo.authors.join(', ') : 'Unknown Author'}</p>
               </div>
+              <div className='flex justify-between items-center mt-2'>
               <Link
                 to={`/book/${result.id}`}
                 state={{ book: result }}
@@ -62,6 +73,14 @@ const Best = () => {
               >
                 More details
               </Link>
+              <button
+                onClick={() => alert('Download functionality not available')}
+                className='text-orange-900'
+              >
+                <FaDownload />
+              </button>
+            </div>
+
             </div>
           </div>
         ))}

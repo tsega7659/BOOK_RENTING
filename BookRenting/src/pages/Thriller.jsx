@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { FaDownload } from 'react-icons/fa';
 
 const Thriller = () => {
   const [books, setBooks] = useState([]);
@@ -52,13 +53,23 @@ const Thriller = () => {
               <div className='text-orange-600 text-sm'>
                 <p>By: {book.volumeInfo.authors ? book.volumeInfo.authors.join(', ') : 'Unknown Author'}</p>
               </div>
-              <Link
-                to={`/book/${book.id}`}
-                state={{ book }}
-                className='text-orange-900 underline'
-              >
-                More details
-              </Link>
+              <div className='flex space-x-2'>
+                <Link
+                  to={`/book/${book.id}`}
+                  state={{ book: book }}
+                  className='text-orange-900 underline'
+                >
+                  More details
+                </Link>
+                {book.accessInfo.webReaderLink && (
+                  <button
+                    onClick={() => handleDownload(book.accessInfo.webReaderLink)}
+                    className='text-orange-900'
+                  >
+                    <FaDownload />
+                  </button>
+                )}
+              </div>
             </div>
           </div>
         ))}

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { FaDownload } from 'react-icons/fa';
 
 const Mystery = () => {
   const [books, setBooks] = useState([]);
@@ -24,6 +25,15 @@ const Mystery = () => {
   useEffect(() => {
     fetchBooks();
   }, []);
+  
+  const handleDownload = (link) => {
+    const downloadLink = document.createElement('a');
+    downloadLink.href = link;
+    downloadLink.setAttribute('download', 'book'); // You might need to modify the filename
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    downloadLink.remove();
+  };
 
   return (
     <div className='lg:mx-28  my-6 lg:mb-0 mb-4 font-serif'>
@@ -52,13 +62,21 @@ const Mystery = () => {
               <div className='text-orange-600 text-sm'>
                 <p>By: {book.volumeInfo.authors ? book.volumeInfo.authors.join(', ') : 'Unknown Author'}</p>
               </div>
+              <div className='flex justify-between items-center mt-2'>
               <Link
-                to={`/book/${book.id}`}
-                state={{ book }}
+                to={`/book/${result.id}`}
+                state={{ book: result }}
                 className='text-orange-900 underline'
               >
                 More details
               </Link>
+              <button
+                onClick={() => alert('Download functionality not available')}
+                className='text-orange-900'
+              >
+                <FaDownload />
+              </button>
+            </div>
             </div>
           </div>
         ))}

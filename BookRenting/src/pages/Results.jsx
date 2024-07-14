@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
+import { FaDownload } from 'react-icons/fa';
 
 const Results = () => {
   const location = useLocation();
@@ -33,6 +34,7 @@ const Results = () => {
               <div className='text-orange-600 text-sm'>
                 <p>By: {result.volumeInfo.authors && result.volumeInfo.authors.join(', ')}</p>
               </div>
+              <div className='flex justify-between items-center mt-2'>
               <Link
                 to={`/book/${result.id}`}
                 state={{ book: result }}
@@ -40,6 +42,14 @@ const Results = () => {
               >
                 More details
               </Link>
+              <button
+                onClick={() => alert('Download functionality not available')}
+                className='text-orange-900'
+              >
+                <FaDownload />
+              </button>
+            </div>
+
             </div>
           </div>
         ))}

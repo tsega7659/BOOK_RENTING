@@ -15,6 +15,7 @@ import Fantasy from "./pages/Fantasy";
 import Thriller from "./pages/Thriller";
 import SelfHelp from "./pages/SelfHelp";
 import Biography from "./pages/Biography";
+import ContactUs from './pages/ContactUs';
 
 
 
@@ -36,7 +37,7 @@ function App() {
         <Route path='/Self-Help' element={<SelfHelp />} /> 
         <Route path='/History' element={<History />} /> 
         <Route path='/Science' element={<Science />} /> 
-
+        <Route path='/contactUs' element = {<ContactUs />} />
       </Routes>
       <Footer />
     </BrowserRouter>
