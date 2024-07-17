@@ -64,8 +64,8 @@ const Fantasy = () => {
               </div>
               <div className='flex justify-between items-center mt-2'>
               <Link
-                to={`/book/${result.id}`}
-                state={{ book: result }}
+                to={`/book/${book.id}`}
+                state={{ book: book }}
                 className='text-orange-900 underline'
               >
                 More details

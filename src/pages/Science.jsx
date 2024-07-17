@@ -3,10 +3,10 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { FaDownload } from 'react-icons/fa';
 
-const Biography = () => {
+const Science = () => {
   const [books, setBooks] = useState([]);
   const [error, setError] = useState(null);
-  const genre = 'biography' || "autobiography";
+  const genre = 'science';
 
   const fetchBooks = async () => {
     const query = `${genre} books`;
@@ -37,7 +37,7 @@ const Biography = () => {
 
   return (
     <div className='lg:mx-28  my-6 lg:mb-0 mb-4 font-serif'>
-      <h2 className='mx-6 text-2xl font-bold mb-8 mt-12 text-orange-900'>Biographical Books</h2>
+      <h2 className='mx-6 text-2xl font-bold mb-8 mt-12 text-orange-900'>scientific  Books</h2>
       <div className='lg:grid grid-cols-4 gap-4 mt-3 p-6 rounded-3xl'>
         {books.map(book => (
           <div key={book.id} className='rounded-2xl shadow-2xl bg-orange-200 mb-4 mx-2 p-4'>
@@ -64,8 +64,8 @@ const Biography = () => {
               </div>
               <div className='flex justify-between items-center mt-2'>
               <Link
-                to={`/book/${result.id}`}
-                state={{ book: result }}
+                to={`/book/${book.id}`}
+                state={{ book: book }}
                 className='text-orange-900 underline'
               >
                 More details
@@ -86,4 +86,4 @@ const Biography = () => {
   );
 };
 
-export default Biography;
+export default Science;
